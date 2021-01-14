@@ -10,5 +10,4 @@ public class Runner {
 		Ims ims = new Ims();
 		ims.imsSystem();
 	}
-//Delete this line later
 }
