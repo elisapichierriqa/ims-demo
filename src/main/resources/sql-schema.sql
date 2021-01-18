@@ -2,7 +2,7 @@ CREATE DATABASE IF NOT EXISTS ims;
 CREATE TABLE IF NOT EXISTS ims.customers (
     customerID INT PRIMARY KEY AUTO_INCREMENT,
     first_name VARCHAR(40),
-    surname VARCHAR(40)
+    last_name VARCHAR(40)
 );
 CREATE TABLE IF NOT EXISTS ims.items (
     itemID INT PRIMARY KEY AUTO_INCREMENT,

@@ -24,14 +24,14 @@ public class CustomerTest {
 	public void settersTest() {
 		assertNotNull(customer.getId());
 		assertNotNull(customer.getFirstName());
-		assertNotNull(customer.getSurname());
+		assertNotNull(customer.getLastName());
 		
 		customer.setId(null);
 		assertNull(customer.getId());
 		customer.setFirstName(null);
 		assertNull(customer.getFirstName());
-		customer.setSurname(null);
-		assertNull(customer.getSurname());
+		customer.setLastName(null);
+		assertNull(customer.getLastName());
 		
 	}
 	
@@ -49,7 +49,7 @@ public class CustomerTest {
 	public void createCustomerWithId() {
 		assertEquals(1L, customer.getId(), 0);
 		assertEquals("Chris", customer.getFirstName());
-		assertEquals("Perrins", customer.getSurname());
+		assertEquals("Perrins", customer.getLastName());
 	}
 	
 	@Test
@@ -102,20 +102,20 @@ public class CustomerTest {
 	
 	@Test
 	public void nullSurname() {
-		customer.setSurname(null);
+		customer.setLastName(null);
 		assertFalse(customer.equals(other));
 	}
 	
 	@Test
 	public void nullSurnameOnBoth() {
-		customer.setSurname(null);
-		other.setSurname(null);
+		customer.setLastName(null);
+		other.setLastName(null);
 		assertTrue(customer.equals(other));
 	}
 	
 	@Test
 	public void otherSurnameDifferent() {
-		other.setSurname("thompson");
+		other.setLastName("thompson");
 		assertFalse(customer.equals(other));
 	}
 	
@@ -124,7 +124,7 @@ public class CustomerTest {
 		Customer customer = new Customer("Chris", "Perrins");
 		assertNull(customer.getId());
 		assertNotNull(customer.getFirstName());
-		assertNotNull(customer.getSurname());
+		assertNotNull(customer.getLastName());
 	}
 	
 	@Test
@@ -140,7 +140,7 @@ public class CustomerTest {
 	
 	@Test
 	public void toStringTest() {
-		String toString = "id:1 first name:Chris surname:Perrins";
+		String toString = "id:1 first name:Chris last name:Perrins";
 		assertEquals(toString, customer.toString());
 	}
 }
