@@ -1,19 +1,19 @@
 package com.qa.ims.persistence.domain;
 
 public class Items {
-	private Long itemID;
+	private String itemID;
 	private String item_name;
 	
-	public Items(Long itemID, String item_name) {
+	public Items(String itemID, String item_name) {
 		this.itemID = itemID;
 		this.item_name = item_name;
 	}
 
-	public Long getItemID() {
+	public String getItemID() {
 		return itemID;
 	}
 
-	public void setItemID(Long itemID) {
+	public void setItemID(String itemID) {
 		this.itemID = itemID;
 	}
 

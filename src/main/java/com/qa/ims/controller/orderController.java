@@ -31,12 +31,10 @@ public class orderController {
 	
 			//View all orders in the system 
 }
-		@Override
-		
 		public List<Orders> readAll() {
 			List<Orders> orders = ordersService.readAll();
 			for(Orders order: orders) {
-				LOGGER.info(orders.toString());
+				LOGGER.info(order.toString());
 			}
 			return orders;
 		}
@@ -44,15 +42,13 @@ public class orderController {
 		/**
 		 * Creates an order in the system
 		 */
-		@Override
 		public Orders create() {
-			return Orders;
+			return null;
 		}
 
 		/**
 		 * Deletes an existing order by the id of the order
 		 */
-		@Override
 		public void delete() {
 			LOGGER.info("Please enter the id of the order you would like to delete");
 			Long orderID = Long.valueOf(getInput());

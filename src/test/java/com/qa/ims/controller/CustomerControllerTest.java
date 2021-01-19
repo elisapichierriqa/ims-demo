@@ -44,16 +44,16 @@ public class CustomerControllerTest {
 		assertEquals(customers, customerController.readAll());
 	}
 
-//	@Test
-//	public void createTest() {
-//		String firstName = "Chris";
-//		String surname = "Perrins";
-//		Mockito.doReturn(firstName, surname).when(customerController).getInput();
-//		Customer customer = new Customer(firstName, surname);
-//		Customer savedCustomer = new Customer(1L, "Chris", "Perrins");
-//		Mockito.when(customerServices.create(customer)).thenReturn(savedCustomer);
-//		assertEquals(savedCustomer, customerController.create());
-//	}
+	@Test
+	public void createTest() {
+		String firstName = "Chris";
+		String surname = "Perrins";
+		Mockito.doReturn(firstName, surname).when(customerController).getInput();
+		Customer customer = new Customer(firstName, surname);
+		Customer savedCustomer = new Customer(1L, "Chris", "Perrins");
+		Mockito.when(customerServices.create(customer)).thenReturn(savedCustomer);
+		assertEquals(savedCustomer, customerController.create());
+	}
 
 	/**
 	 * 

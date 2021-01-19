@@ -143,4 +143,10 @@ public class CustomerDaoMysql implements Dao<Customer> {
 		}
 	}
 
+	@Override
+	public void delete(String string) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

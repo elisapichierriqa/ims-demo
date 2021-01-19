@@ -11,5 +11,3 @@ public class Runner {
 		ims.imsSystem();
 	}
 }
-
-//run from here
