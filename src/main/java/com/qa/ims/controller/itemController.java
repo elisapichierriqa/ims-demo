@@ -35,10 +35,10 @@ public class itemController implements CrudController<Items>{
 //add an item to the system
 	@Override
 	public Items create() {
-		LOGGER.info("Please enter the name of the item you'd like to add.");
+		LOGGER.info("Please enter the name of the item you'd like to create.");
 		String item_name = getInput();
 		Items Items = itemsService.create(new Items(null, item_name));
-		LOGGER.info("Item added");
+		LOGGER.info("Item created.");
 		return Items;
 	}
 //update an item in the system
@@ -54,7 +54,7 @@ public class itemController implements CrudController<Items>{
 		return Items;
 	}
 	
-//delete an item from the sustem
+//delete an item from the system
 	@Override
 	public void delete() {
 			LOGGER.info("Please enter the id of the item you would like to delete");

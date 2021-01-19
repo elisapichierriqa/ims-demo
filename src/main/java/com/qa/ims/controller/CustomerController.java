@@ -59,12 +59,12 @@ public class CustomerController implements CrudController<Customer>{
 	@Override
 	public Customer update() {
 		LOGGER.info("Please enter the id of the customer you would like to update");
-		Long id = Long.valueOf(getInput());
+		Long customerID = Long.valueOf(getInput());
 		LOGGER.info("Please enter a first name");
 		String firstName = getInput();
 		LOGGER.info("Please enter a last name");
 		String lastName = getInput();
-		Customer customer = customerService.update(new Customer(id, firstName, lastName));
+		Customer customer = customerService.update(new Customer(customerID, firstName, lastName));
 		LOGGER.info("Customer Updated");
 		return customer;
 	}
@@ -75,8 +75,8 @@ public class CustomerController implements CrudController<Customer>{
 	@Override
 	public void delete() {
 		LOGGER.info("Please enter the id of the customer you would like to delete");
-		Long id = Long.valueOf(getInput());
-		customerService.delete(id);
+		Long customerID = Long.valueOf(getInput());
+		customerService.delete(customerID);
 	}
 	
 }

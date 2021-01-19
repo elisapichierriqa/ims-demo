@@ -20,18 +20,25 @@ public class orderController {
 		}
 		
 
+		private void ordersService(CrudServices<Orders> ordersService) {
+			this.ordersService(ordersService);
+			
+		}
+
+
 		String getInput() {
 			return Utils.getInput();
 	
 			//View all orders in the system 
 }
 		@Override
+		
 		public List<Orders> readAll() {
-			List<Orders> Orders = ordersService.readAll();
-			for(Orders orders: Orders) {
-				LOGGER.info(Orders.toString());
+			List<Orders> orders = ordersService.readAll();
+			for(Orders order: orders) {
+				LOGGER.info(orders.toString());
 			}
-			return Orders;
+			return orders;
 		}
 
 		/**
@@ -39,13 +46,7 @@ public class orderController {
 		 */
 		@Override
 		public Orders create() {
-			LOGGER.info("Please enter a first name");
-			String firstName = getInput();
-			LOGGER.info("Please enter a last name");
-			String lastName = getInput();
-			Customer customer = customerService.create(new Customer(firstName, lastName));
-			LOGGER.info("Customer created");
-			return customer;
+			return Orders;
 		}
 
 		/**
@@ -53,9 +54,9 @@ public class orderController {
 		 */
 		@Override
 		public void delete() {
-			LOGGER.info("Please enter the id of the customer you would like to delete");
-			Long id = Long.valueOf(getInput());
-			customerService.delete(id);
+			LOGGER.info("Please enter the id of the order you would like to delete");
+			Long orderID = Long.valueOf(getInput());
+			ordersService.delete(orderID);
 		}
 		
 }
