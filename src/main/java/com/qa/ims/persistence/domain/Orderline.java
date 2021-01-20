@@ -2,13 +2,13 @@ package com.qa.ims.persistence.domain;
 
 public class Orderline {
 	
-	private Long orderlineID;
-	private Long orderID;
-	private Long itemID;
-	private Long customerID;
+	private String orderlineID;
+	private String orderID;
+	private String itemID;
+	private String customerID;
 	private int quantity;
 	
-public Orderline(Long orderlineID, Long orderID, Long itemID, Long customerID, int quantity) {
+public Orderline(String orderlineID, String orderID, String itemID, String customerID, int quantity) {
 	this.orderlineID = orderlineID;
 	this.orderID = orderID;
 	this.itemID = itemID;
@@ -16,35 +16,35 @@ public Orderline(Long orderlineID, Long orderID, Long itemID, Long customerID, i
 	this.quantity = quantity;
 }
 
-public Long getOrderlineID() {
+public String getOrderlineID() {
 	return orderlineID;
 }
 
-public void setOrderlineID(Long orderlineID) {
+public void setOrderlineID(String orderlineID) {
 	this.orderlineID = orderlineID;
 }
 
-public Long getOrderID() {
+public String getOrderID() {
 	return orderID;
 }
 
-public void setOrderID(Long orderID) {
+public void setOrderID(String orderID) {
 	this.orderID = orderID;
 }
 
-public Long getItemID() {
+public String getItemID() {
 	return itemID;
 }
 
-public void setItemID(Long itemID) {
+public void setItemID(String itemID) {
 	this.itemID = itemID;
 }
 
-public Long getCustomerID() {
+public String getCustomerID() {
 	return customerID;
 }
 
-public void setCustomerID(Long customerID) {
+public void setCustomerID(String customerID) {
 	this.customerID = customerID;
 }
 

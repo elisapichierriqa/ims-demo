@@ -3,10 +3,12 @@ package com.qa.ims.persistence.domain;
 public class Items {
 	private String itemID;
 	private String item_name;
+	private Double item_value;
 	
-	public Items(String itemID, String item_name) {
+	public Items(String itemID, String item_name, Double item_value) {
 		this.itemID = itemID;
 		this.item_name = item_name;
+		this.item_value = item_value;
 	}
 
 	public String getItemID() {
@@ -62,6 +64,14 @@ public class Items {
 		} else if (!item_name.equals(other.item_name))
 			return false;
 		return true;
+	}
+
+	public Double getItem_value() {
+		return item_value;
+	}
+
+	public void setItem_value(Double item_value) {
+		this.item_value = item_value;
 	}
 
 }

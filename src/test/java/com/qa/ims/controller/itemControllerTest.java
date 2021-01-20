@@ -29,9 +29,9 @@ import com.qa.ims.persistence.domain.Items;
 	public void readAllTest() {
 		itemController itemController = new itemController(itemsServices);
 		List<Items> items = new ArrayList<>();
-		items.add(new Items("1", "Easel"));
-		items.add(new Items("2", "Dice"));
-		items.add(new Items("3", "Wizard Hat"));
+		items.add(new Items("1", "Easel", 20.00));
+		items.add(new Items("2", "Dice", 5.00));
+		items.add(new Items("3", "Wizard Hat", 100.00));
 		Mockito.when(itemsServices.readAll()).thenReturn(items);
 		assertEquals(items, itemController.readAll());
 	
@@ -40,8 +40,8 @@ import com.qa.ims.persistence.domain.Items;
 	public void createTest() {
 		String item_name = "Dice";
 		Mockito.doReturn(item_name).when(itemController).getInput();
-		Items items = new Items(null, item_name);
-		Items savedItems = new Items(null, "Easel");
+		Items items = new Items(null, item_name, 5.00);
+		Items savedItems = new Items(null, "Dice", 5.00);
 		Mockito.when(itemsServices.create(items)).thenReturn(savedItems);
 		assertEquals(savedItems, itemController.create());
 	}
@@ -53,8 +53,9 @@ import com.qa.ims.persistence.domain.Items;
 	public void updateTest() {
 		String itemID = "1";
 		String item_name = "Easel";
+		Double item_value = 20.00;
 		Mockito.doReturn(itemID, item_name).when(itemController).getInput();
-		Items items = new Items(itemID, item_name);
+		Items items = new Items(itemID, item_name, item_value);
 		Mockito.when(itemsServices.update(items)).thenReturn(items);
 		assertEquals(items, itemController.update());
 	}

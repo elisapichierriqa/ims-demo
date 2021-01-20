@@ -7,6 +7,7 @@ CREATE TABLE IF NOT EXISTS ims.customers (
 CREATE TABLE IF NOT EXISTS ims.items (
     itemID INT PRIMARY KEY AUTO_INCREMENT,
     item_name VARCHAR(40)
+    item_value DOUBLE (40)
 );
 CREATE TABLE IF NOT EXISTS ims.orders (
     orderID INT PRIMARY KEY AUTO_INCREMENT,

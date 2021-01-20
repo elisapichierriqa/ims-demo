@@ -33,26 +33,28 @@ public class ItemDaoMysql implements Dao<Items> {
 	Items itemFromResultSet(ResultSet resultSet) throws SQLException {
 		String itemID = resultSet.getString("itemID");
 		String item_name = resultSet.getString("item_name");
-		return new Items(itemID, item_name);
+		Double item_value = resultSet.getDouble("item_value");
+		return new Items(itemID, item_name, item_value);
 	}
 
-	//Read all Items in system
+	// Read all Items in system
 	@Override
 	public List<Items> readAll() {
-			try (Connection connection = DriverManager.getConnection(jdbcConnectionUrl, username, password);
-					Statement statement = connection.createStatement();
-					ResultSet resultSet = statement.executeQuery("select * from items");) {
-				ArrayList<Items> items = new ArrayList<>();
-				while (resultSet.next()) {
-					items.add(itemFromResultSet(resultSet));
-				}
-				return items;
-			} catch (SQLException e) {
-				LOGGER.debug(e.getStackTrace());
-				LOGGER.error(e.getMessage());
+		try (Connection connection = DriverManager.getConnection(jdbcConnectionUrl, username, password);
+				Statement statement = connection.createStatement();
+				ResultSet resultSet = statement.executeQuery("select * from items");) {
+			ArrayList<Items> items = new ArrayList<>();
+			while (resultSet.next()) {
+				items.add(itemFromResultSet(resultSet));
 			}
-			return new ArrayList<>();
+			return items;
+		} catch (SQLException e) {
+			LOGGER.debug(e.getStackTrace());
+			LOGGER.error(e.getMessage());
+		}
+		return new ArrayList<>();
 	}
+
 	public Items readLatest() {
 		try (Connection connection = DriverManager.getConnection(jdbcConnectionUrl, username, password);
 				Statement statement = connection.createStatement();
@@ -71,8 +73,7 @@ public class ItemDaoMysql implements Dao<Items> {
 	public Items create(Items item) {
 		try (Connection connection = DriverManager.getConnection(jdbcConnectionUrl, username, password);
 				Statement statement = connection.createStatement();) {
-			statement.executeUpdate("insert into items(item_name) values('" + item.getItem_name()
-					+ "')");
+			statement.executeUpdate("insert into items(item_name) values('" + item.getItem_name() + "')");
 			return readLatest();
 		} catch (Exception e) {
 			LOGGER.debug(e.getStackTrace());
@@ -99,7 +100,8 @@ public class ItemDaoMysql implements Dao<Items> {
 	public Items update(Items item) {
 		try (Connection connection = DriverManager.getConnection(jdbcConnectionUrl, username, password);
 				Statement statement = connection.createStatement();) {
-			statement.executeUpdate("update items set item_name ='" + item.getItem_name() + "' where itemID =" + item.getItemID());
+			statement.executeUpdate(
+					"update items set item_name ='" + item.getItem_name() + "' where itemID =" + item.getItemID());
 			return readItems(item.getItemID());
 		} catch (Exception e) {
 			LOGGER.debug(e.getStackTrace());
@@ -107,6 +109,7 @@ public class ItemDaoMysql implements Dao<Items> {
 		}
 		return null;
 	}
+
 //Delete an item from system by itemID
 	@Override
 	public void delete(String itemID) {
@@ -119,11 +122,15 @@ public class ItemDaoMysql implements Dao<Items> {
 		}
 	}
 
-@Override
-public void delete(long id) {
-	// TODO Auto-generated method stub
-	
-}
-
-		
+	@Override
+	public void delete(long id) {
+		try (Connection connection = DriverManager.getConnection(jdbcConnectionUrl, username, password);
+				Statement statement = connection.createStatement();) {
+			statement.executeUpdate("delete from items where item id = " + id);
+		} catch (Exception e) {
+			LOGGER.debug(e.getStackTrace());
+			LOGGER.error(e.getMessage());
+		}
 	}
+
+}
