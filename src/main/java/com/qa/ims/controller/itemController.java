@@ -42,7 +42,7 @@ public class itemController implements CrudController<Items>{
 		String item_name = getInput();
 		LOGGER.info("Please enter the value of the item you'd like to create.");
 		Double item_value = Double.valueOf(getInput());
-		Items item = itemsService.create(new Items(null, item_name, item_value));
+		Items item = itemsService.create(new Items("", item_name, item_value));
 		LOGGER.info("Item created.");
 		return item;
 }
@@ -54,7 +54,7 @@ public class itemController implements CrudController<Items>{
 
 		LOGGER.info("Please enter the id of the item you would like to update");
 		String itemID = String.valueOf(getInput());
-		Items Items = itemsService.update(new Items(itemID, null, null));
+		Items Items = itemsService.update(new Items(itemID, "", null));
 		LOGGER.info("Item Updated");
 		return Items;
 	}

@@ -37,7 +37,7 @@ public class OrderDaoMysql implements Dao<Orders> {
 		String orderID = resultSet.getString("orderID");
 		String customerID = resultSet.getString("customerID");
 		String itemID = resultSet.getString("itemID");
-		int item_value = resultSet.getInt(item_value);
+		Double item_value = resultSet.getDouble(item_value);
 		return new Orders(orderID, customerID, itemID);
 	}
 

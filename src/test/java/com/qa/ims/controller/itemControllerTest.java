@@ -40,8 +40,10 @@ import com.qa.ims.persistence.domain.Items;
 	public void createTest() {
 		String item_name = "Dice";
 		Mockito.doReturn(item_name).when(itemController).getInput();
-		Items items = new Items(null, item_name, 5.00);
-		Items savedItems = new Items(null, "Dice", 5.00);
+		Double item_value = 5.00;
+		Mockito.doReturn(item_value).when(itemController).getInput();
+		Items items = new Items("", item_name, item_value);
+		Items savedItems = new Items("", "Dice", 5.00);
 		Mockito.when(itemsServices.create(items)).thenReturn(savedItems);
 		assertEquals(savedItems, itemController.create());
 	}
