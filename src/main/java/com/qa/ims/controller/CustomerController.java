@@ -65,7 +65,7 @@ public class CustomerController implements CrudController<Customer>{
 		LOGGER.info("Please enter a last name");
 		String lastName = getInput();
 		Customer customer = customerService.update(new Customer(customerID, firstName, lastName));
-		LOGGER.info("Customer Updated");
+		LOGGER.info("Customer Updated.");
 		return customer;
 	}
 
@@ -77,6 +77,7 @@ public class CustomerController implements CrudController<Customer>{
 		LOGGER.info("Please enter the id of the customer you would like to delete");
 		Long customerID = Long.valueOf(getInput());
 		customerService.delete(customerID);
+		LOGGER.info("Customer Deleted.");
 	}
 	
 }

@@ -11,6 +11,7 @@ import java.util.List;
 import org.apache.log4j.Logger;
 
 import com.qa.ims.persistence.domain.Customer;
+import com.qa.ims.persistence.domain.Orders;
 
 public class CustomerDaoMysql implements Dao<Customer> {
 
@@ -33,10 +34,10 @@ public class CustomerDaoMysql implements Dao<Customer> {
 	}
 
 	Customer customerFromResultSet(ResultSet resultSet) throws SQLException {
-		Long customerID = resultSet.getLong("customerID");
+		Long id = resultSet.getLong("id");
 		String firstName = resultSet.getString("first_name");
 		String lastName = resultSet.getString("last_name");
-		return new Customer(customerID, firstName, lastName);
+		return new Customer(id, firstName, lastName);
 	}
 
 	/**
@@ -64,7 +65,7 @@ public class CustomerDaoMysql implements Dao<Customer> {
 	public Customer readLatest() {
 		try (Connection connection = DriverManager.getConnection(jdbcConnectionUrl, username, password);
 				Statement statement = connection.createStatement();
-				ResultSet resultSet = statement.executeQuery("SELECT FROM customers ORDER BY customerID DESC LIMIT 1");) {
+				ResultSet resultSet = statement.executeQuery("SELECT * FROM customers ORDER BY id DESC LIMIT 1");) {
 			resultSet.next();
 			return customerFromResultSet(resultSet);
 		} catch (Exception e) {
@@ -93,10 +94,10 @@ public class CustomerDaoMysql implements Dao<Customer> {
 		return null;
 	}
 
-	public Customer readCustomer(Long customerID) {
+	public Customer readCustomer(Long id) {
 		try (Connection connection = DriverManager.getConnection(jdbcConnectionUrl, username, password);
 				Statement statement = connection.createStatement();
-				ResultSet resultSet = statement.executeQuery("SELECT FROM customers where customer ID = " + customerID);) {
+				ResultSet resultSet = statement.executeQuery("SELECT * FROM customers where customer ID = " + id);) {
 			resultSet.next();
 			return customerFromResultSet(resultSet);
 		} catch (Exception e) {
@@ -117,9 +118,9 @@ public class CustomerDaoMysql implements Dao<Customer> {
 	public Customer update(Customer customer) {
 		try (Connection connection = DriverManager.getConnection(jdbcConnectionUrl, username, password);
 				Statement statement = connection.createStatement();) {
-			statement.executeUpdate("update customers set first_name ='" + customer.getFirstName() + "', last_name ='"
-					+ customer.getLastName() + "' where customerID =" + customer.getCustomerID());
-			return readCustomer(customer.getCustomerID());
+			statement.executeUpdate("update customers set first_name = '" + customer.getFirstName() + "', last_name = '"
+					+ customer.getLastName() + "' WHERE id =" + customer.getId());
+			return readCustomer(customer.getId());
 		} catch (Exception e) {
 			LOGGER.debug(e.getStackTrace());
 			LOGGER.error(e.getMessage());
@@ -133,10 +134,10 @@ public class CustomerDaoMysql implements Dao<Customer> {
 	 * @param id - id of the customer
 	 */
 	@Override
-	public void delete(long customerID) {
+	public void delete(Long id) {
 		try (Connection connection = DriverManager.getConnection(jdbcConnectionUrl, username, password);
 				Statement statement = connection.createStatement();) {
-			statement.executeUpdate("delete from customers where id = " + customerID);
+			statement.executeUpdate("delete from customers where id =" + id);
 		} catch (Exception e) {
 			LOGGER.debug(e.getStackTrace());
 			LOGGER.error(e.getMessage());
@@ -144,9 +145,49 @@ public class CustomerDaoMysql implements Dao<Customer> {
 	}
 
 	@Override
-	public void delete(String string) {
+	public void delete(String id) {
+		try (Connection connection = DriverManager.getConnection(jdbcConnectionUrl, username, password);
+				Statement statement = connection.createStatement();) {
+			statement.executeUpdate("delete from customers where id =" + id);
+		} catch (Exception e) {
+			LOGGER.debug(e.getStackTrace());
+			LOGGER.error(e.getMessage());
+		
+		}
+}
+
+	@Override
+	public Orders updateOrder(Orders order) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Orders createOrder(Orders order) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void deleteOrder(String orderID) {
 		// TODO Auto-generated method stub
 		
 	}
 
+	@Override
+	public void delete(long id) {
+		try (Connection connection = DriverManager.getConnection(jdbcConnectionUrl, username, password);
+				Statement statement = connection.createStatement();) {
+			statement.executeUpdate("delete from customers where id =" + id);
+		} catch (Exception e) {
+			LOGGER.debug(e.getStackTrace());
+			LOGGER.error(e.getMessage());
+		
+	}
 }
+
+	@Override
+	public void deleteOrder(Long orderlineID, Long orderID) {
+		// TODO Auto-generated method stub
+		
+	}}

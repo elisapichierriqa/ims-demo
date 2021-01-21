@@ -42,7 +42,7 @@ public class itemController implements CrudController<Items>{
 		String item_name = getInput();
 		LOGGER.info("Please enter the value of the item you'd like to create.");
 		Double item_value = Double.valueOf(getInput());
-		Items item = itemsService.create(new Items("", item_name, item_value));
+		Items item = itemsService.create(new Items(item_name, item_value));
 		LOGGER.info("Item created.");
 		return item;
 }
@@ -53,18 +53,28 @@ public class itemController implements CrudController<Items>{
 	public Items update() {
 
 		LOGGER.info("Please enter the id of the item you would like to update");
-		String itemID = String.valueOf(getInput());
-		Items Items = itemsService.update(new Items(itemID, "", null));
-		LOGGER.info("Item Updated");
+		Long id = Long.valueOf(getInput());
+		LOGGER.info("Enter the name of the item.");
+		String item_name = getInput();
+		LOGGER.info("Enter the new price of the item.");
+		Double item_value = Double.valueOf(getInput());
+		Items Items = itemsService.update(new Items(id, item_name, item_value));
+		LOGGER.info("Item Updated.");
 		return Items;
 	}
 //delete an item from the system
 	@Override
 	public void delete() {
 			LOGGER.info("Please enter the id of the item you would like to delete");
-			Long itemID = Long.valueOf(getInput());
-			itemsService.delete(itemID);
+			Long id = Long.valueOf(getInput());
+			itemsService.delete(id);
+			LOGGER.info("Item deleted.");
 		}
+
+	public Double getDoubleInput() {
+		return Utils.getDoubleInput();
+		
+	}
 		
 
 }

@@ -22,12 +22,12 @@ public class CustomerTest {
 	
 	@Test
 	public void settersTest() {
-		assertNotNull(customer.getCustomerID());
+		assertNotNull(customer.getId());
 		assertNotNull(customer.getFirstName());
 		assertNotNull(customer.getLastName());
 		
-		customer.setCustomerID(null);
-		assertNull(customer.getCustomerID());
+		customer.setId(null);
+		assertNull(customer.getId());
 		customer.setFirstName(null);
 		assertNull(customer.getFirstName());
 		customer.setLastName(null);
@@ -47,7 +47,7 @@ public class CustomerTest {
 	
 	@Test
 	public void createCustomerWithId() {
-		assertEquals(1L, customer.getCustomerID(), 0);
+		assertEquals(1L, customer.getId(), 0);
 		assertEquals("Chris", customer.getFirstName());
 		assertEquals("Perrins", customer.getLastName());
 	}
@@ -82,21 +82,21 @@ public class CustomerTest {
 	}
 	
 	@Test
-	public void nullCustomerID() {
-		customer.setCustomerID(null);
+	public void nullId() {
+		customer.setId(null);
 		assertFalse(customer.equals(other));
 	}
 	
 	@Test
-	public void nullCustomerIDOnBoth() {
-		customer.setCustomerID(null);
-		other.setCustomerID(null);
+	public void nullIdOnBoth() {
+		customer.setId(null);
+		other.setId(null);
 		assertTrue(customer.equals(other));
 	}
 	
 	@Test
-	public void otherCustomerIDDifferent() {
-		other.setCustomerID(2L);
+	public void otherIdDifferent() {
+		other.setId(2L);
 		assertFalse(customer.equals(other));
 	}
 	
@@ -120,9 +120,9 @@ public class CustomerTest {
 	}
 	
 	@Test
-	public void constructorWithoutCustomerID() {
+	public void constructorWithoutId() {
 		Customer customer = new Customer("Chris", "Perrins");
-		assertNull(customer.getCustomerID());
+		assertNull(customer.getId());
 		assertNotNull(customer.getFirstName());
 		assertNotNull(customer.getLastName());
 	}
@@ -140,7 +140,7 @@ public class CustomerTest {
 	
 	@Test
 	public void toStringTest() {
-		String toString = "customer ID:1 first name:Chris last name:Perrins";
+		String toString = "customer id:1 first name:Chris last name:Perrins";
 		assertEquals(toString, customer.toString());
 	}
 }

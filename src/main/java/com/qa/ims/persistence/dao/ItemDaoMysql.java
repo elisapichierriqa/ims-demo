@@ -11,6 +11,7 @@ import java.util.List;
 import org.apache.log4j.Logger;
 
 import com.qa.ims.persistence.domain.Items;
+import com.qa.ims.persistence.domain.Orders;
 
 public class ItemDaoMysql implements Dao<Items> {
 	public static final Logger LOGGER = Logger.getLogger(ItemDaoMysql.class);
@@ -31,10 +32,10 @@ public class ItemDaoMysql implements Dao<Items> {
 	}
 
 	Items itemFromResultSet(ResultSet resultSet) throws SQLException {
-		String itemID = resultSet.getString("itemID");
+		Long id = resultSet.getLong("id");
 		String item_name = resultSet.getString("item_name");
 		Double item_value = resultSet.getDouble("item_value");
-		return new Items(itemID, item_name, item_value);
+		return new Items(id, item_name, item_value);
 	}
 
 	// Read all Items in system
@@ -58,7 +59,7 @@ public class ItemDaoMysql implements Dao<Items> {
 	public Items readLatest() {
 		try (Connection connection = DriverManager.getConnection(jdbcConnectionUrl, username, password);
 				Statement statement = connection.createStatement();
-				ResultSet resultSet = statement.executeQuery("SELECT FROM items ORDER BY itemID DESC LIMIT 1");) {
+				ResultSet resultSet = statement.executeQuery("SELECT* FROM items ORDER BY itemID DESC LIMIT 1");) {
 			resultSet.next();
 			return itemFromResultSet(resultSet);
 		} catch (Exception e) {
@@ -82,10 +83,10 @@ public class ItemDaoMysql implements Dao<Items> {
 		return null;
 	}
 
-	public Items readItems(String itemID) {
+	public Items readItems(Long id) {
 		try (Connection connection = DriverManager.getConnection(jdbcConnectionUrl, username, password);
 				Statement statement = connection.createStatement();
-				ResultSet resultSet = statement.executeQuery("SELECT FROM items where itemID = " + itemID);) {
+				ResultSet resultSet = statement.executeQuery("SELECT * FROM items where itemID = " + id);) {
 			resultSet.next();
 			return itemFromResultSet(resultSet);
 		} catch (Exception e) {
@@ -101,8 +102,8 @@ public class ItemDaoMysql implements Dao<Items> {
 		try (Connection connection = DriverManager.getConnection(jdbcConnectionUrl, username, password);
 				Statement statement = connection.createStatement();) {
 			statement.executeUpdate(
-					"update items set item_name ='" + item.getItem_name() + "' where itemID =" + item.getItemID());
-			return readItems(item.getItemID());
+					"update items set item_name ='" + item.getItem_name() + "' where id =" + item.getId());
+			return readItems(item.getId());
 		} catch (Exception e) {
 			LOGGER.debug(e.getStackTrace());
 			LOGGER.error(e.getMessage());
@@ -110,16 +111,46 @@ public class ItemDaoMysql implements Dao<Items> {
 		return null;
 	}
 
-//Delete an item from system by itemID
+//Delete an item from system by id
+	
 	@Override
-	public void delete(String itemID) {
+	public void delete(Long id) {
 		try (Connection connection = DriverManager.getConnection(jdbcConnectionUrl, username, password);
 				Statement statement = connection.createStatement();) {
-			statement.executeUpdate("delete from items where item id = " + itemID);
+			statement.executeUpdate("delete from items where item id = " + id);
 		} catch (Exception e) {
 			LOGGER.debug(e.getStackTrace());
 			LOGGER.error(e.getMessage());
 		}
+	}
+	
+	@Override
+	public void delete(String id) {
+		try (Connection connection = DriverManager.getConnection(jdbcConnectionUrl, username, password);
+				Statement statement = connection.createStatement();) {
+			statement.executeUpdate("delete from items where item id = " + id);
+		} catch (Exception e) {
+			LOGGER.debug(e.getStackTrace());
+			LOGGER.error(e.getMessage());
+		}
+	}
+
+	@Override
+	public Orders updateOrder(Orders order) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Orders createOrder(Orders order) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void deleteOrder(String orderID) {
+		// TODO Auto-generated method stub
+		
 	}
 
 	@Override
@@ -131,6 +162,12 @@ public class ItemDaoMysql implements Dao<Items> {
 			LOGGER.debug(e.getStackTrace());
 			LOGGER.error(e.getMessage());
 		}
+		
 	}
 
+	@Override
+	public void deleteOrder(Long orderlineID, Long orderID) {
+		// TODO Auto-generated method stub
+		
+	}
 }

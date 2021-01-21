@@ -1,42 +1,42 @@
 package com.qa.ims.persistence.domain;
 
 public class Orders {
-	private String orderID;
-	private String customerID;
-	private String itemID;
+	private Long orderID;
+	private Long customerID;
+	private String postcode;
 	
 	
-public Orders(String orderID, String customerID, String itemID) {
+public Orders(Long orderID, Long customerID, String postcode) {
 	this.orderID = orderID;
 	this.customerID = customerID;
-	this.itemID = itemID;
+	this.postcode = postcode;
 }
 
-public String getOrderID() {
+public Long getOrderID() {
 	return orderID;
 }
 
-public void setOrderID(String orderID) {
+public void setOrderID(Long orderID) {
 	this.orderID = orderID;
 }
 
-public String getItemID() {
-	return itemID;
+public String getpostcode() {
+	return postcode;
 }
 
-public String getCustomerID() {
+public Long getCustomerID() {
 	return customerID;
 }
 
-public void setCustomerID(String customerID) {
+public void setCustomerID(Long customerID) {
 	this.customerID = customerID;
 }
 
-public void setItemID(String itemID) {
-	this.itemID = itemID;
+public void setItemID(String postcode) {
+	this.postcode = postcode;
 }
 public String toString() {
-	return "order ID:" + orderID + " customer ID:" + customerID + " item ID:" + itemID;
+	return "order ID:" + orderID + " customer ID:" + customerID + " postcode:" + postcode;
 }
 
 @Override
@@ -45,7 +45,7 @@ public int hashCode() {
 	int result = 1;
 	result = prime * result + ((orderID == null) ? 0 : orderID.hashCode());
 	result = prime * result + ((customerID == null) ? 0 : customerID.hashCode());
-	result = prime * result + ((itemID == null) ? 0 : itemID.hashCode());
+	result = prime * result + ((postcode == null) ? 0 : postcode.hashCode());
 	return result;
 }
 
@@ -68,17 +68,12 @@ public boolean equals(Object obj) {
 			return false;
 	} else if (!customerID.equals(other.customerID))
 		return false;
-	if (itemID == null) {
-		if (other.itemID != null)
+	if (postcode == null) {
+		if (other.postcode != null)
 			return false;
-	} else if (!itemID.equals(other.itemID))
+	} else if (!postcode.equals(other.postcode))
 		return false;
 	return true;
-}
-
-public Double getItem_value() {
-	// TODO Auto-generated method stub
-	return null;
 }
 
 }

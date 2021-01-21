@@ -29,9 +29,9 @@ import com.qa.ims.persistence.domain.Items;
 	public void readAllTest() {
 		itemController itemController = new itemController(itemsServices);
 		List<Items> items = new ArrayList<>();
-		items.add(new Items("1", "Easel", 20.00));
-		items.add(new Items("2", "Dice", 5.00));
-		items.add(new Items("3", "Wizard Hat", 100.00));
+		items.add(new Items("Easel", 20.00));
+		items.add(new Items("Dice", 5.00));
+		items.add(new Items("Wizard Hat", 100.00));
 		Mockito.when(itemsServices.readAll()).thenReturn(items);
 		assertEquals(items, itemController.readAll());
 	
@@ -39,11 +39,11 @@ import com.qa.ims.persistence.domain.Items;
 	@Test
 	public void createTest() {
 		String item_name = "Dice";
-		Mockito.doReturn(item_name).when(itemController).getInput();
 		Double item_value = 5.00;
-		Mockito.doReturn(item_value).when(itemController).getInput();
-		Items items = new Items("", item_name, item_value);
-		Items savedItems = new Items("", "Dice", 5.00);
+		Mockito.doReturn(item_name).when(itemController).getInput();
+		Mockito.doReturn(item_value).when(itemController).getDoubleInput();
+		Items items = new Items(item_name, item_value);
+		Items savedItems = new Items(1L, "Easel", 20.00);
 		Mockito.when(itemsServices.create(items)).thenReturn(savedItems);
 		assertEquals(savedItems, itemController.create());
 	}
@@ -53,11 +53,11 @@ import com.qa.ims.persistence.domain.Items;
 	 */
 	@Test
 	public void updateTest() {
-		String itemID = "1";
+		String id = "1";
 		String item_name = "Easel";
 		Double item_value = 20.00;
-		Mockito.doReturn(itemID, item_name).when(itemController).getInput();
-		Items items = new Items(itemID, item_name, item_value);
+		Mockito.doReturn(id, item_name).when(itemController).getInput();
+		Items items = new Items(1L, item_name, item_value);
 		Mockito.when(itemsServices.update(items)).thenReturn(items);
 		assertEquals(items, itemController.update());
 	}
@@ -68,10 +68,10 @@ import com.qa.ims.persistence.domain.Items;
 	 */
 	@Test
 	public void deleteTest() {
-		String itemID = "1";
-		Mockito.doReturn(itemID).when(itemController).getInput();
+		String id = "1";
+		Mockito.doReturn(id).when(itemController).getInput();
 		itemController.delete();
-		Mockito.verify(itemsServices, Mockito.times(1)).delete("1");
+		Mockito.verify(itemsServices, Mockito.times(1)).delete(1L);
 	}
 	
 }

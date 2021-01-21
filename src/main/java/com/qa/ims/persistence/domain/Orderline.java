@@ -2,57 +2,73 @@ package com.qa.ims.persistence.domain;
 
 public class Orderline {
 	
-	private String orderlineID;
-	private String orderID;
-	private String itemID;
-	private String customerID;
-	private int quantity;
+	private Long orderlineID;
+	private Long orderID;
+	private Long itemID;
 	
-public Orderline(String orderlineID, String orderID, String itemID, String customerID, int quantity) {
+public Orderline(Long orderlineID, Long orderID, Long itemID) {
 	this.orderlineID = orderlineID;
 	this.orderID = orderID;
 	this.itemID = itemID;
-	this.customerID = customerID;
-	this.quantity = quantity;
+
 }
 
-public String getOrderlineID() {
+public Long getOrderlineID() {
 	return orderlineID;
 }
 
-public void setOrderlineID(String orderlineID) {
+public void setOrderlineID(Long orderlineID) {
 	this.orderlineID = orderlineID;
 }
 
-public String getOrderID() {
+public Long getOrderID() {
 	return orderID;
 }
 
-public void setOrderID(String orderID) {
+public void setOrderID(Long orderID) {
 	this.orderID = orderID;
 }
 
-public String getItemID() {
+public Long getItemID() {
 	return itemID;
 }
 
-public void setItemID(String itemID) {
+public void setItemID(Long itemID) {
 	this.itemID = itemID;
 }
-
-public String getCustomerID() {
-	return customerID;
+@Override
+public int hashCode() {
+	final int prime = 31;
+	int result = 1;
+	result = prime * result + ((orderlineID == null) ? 0 : orderlineID.hashCode());
+	result = prime * result + ((orderID == null) ? 0 : orderID.hashCode());
+	return result;
 }
 
-public void setCustomerID(String customerID) {
-	this.customerID = customerID;
-}
-
-public int getQuantity() {
-	return quantity;
-}
-
-public void setQuantity(int quantity) {
-	this.quantity = quantity;
+@Override
+public boolean equals(Object obj) {
+	if (this == obj)
+		return true;
+	if (obj == null)
+		return false;
+	if (getClass() != obj.getClass())
+		return false;
+	Items other = (Items) obj;
+	if (orderlineID == null) {
+		if (other.orderlineID != null)
+			return false;
+	} else if (!orderlineID.equals(other.orderlineID))
+		return false;
+	if (orderID == null) {
+		if (other.orderID != null)
+			return false;
+	} else if (orderID.equals(other.orderID))
+		return false;
+	if (itemID == null) {
+		if (other.itemID != null)
+			return false;
+	} else if (!itemID.equals(other.itemID))
+		return false;
+	return true;
 }
 }

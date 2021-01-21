@@ -50,5 +50,15 @@ public class orderlineController implements CrudController<Orderline>{
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+
+	public CrudServices<Orderline> getOrderlineService() {
+		return orderlineService;
+	}
+
+
+	public void setOrderlineService(CrudServices<Orderline> orderlineService) {
+		this.orderlineService = orderlineService;
+	}
 	
 }

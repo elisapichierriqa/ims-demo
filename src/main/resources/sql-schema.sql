@@ -1,30 +1,6 @@
-CREATE DATABASE IF NOT EXISTS ims;
-CREATE TABLE IF NOT EXISTS ims.customers (
-    customerID LONG PRIMARY KEY AUTO_INCREMENT,
-    first_name VARCHAR(40),
-    last_name VARCHAR(40)
-);
-CREATE TABLE IF NOT EXISTS ims.items (
-    itemID LONG PRIMARY KEY AUTO_INCREMENT,
-    item_name VARCHAR(40)
-);
-CREATE TABLE ims.orders (
-    orderID LONG NOT NULL PRIMARY KEY AUTO_INCREMENT,
-    customerID LONG NOT NULL,
-    FOREIGN KEY (customerID)
-        REFERENCES customers(customerID),
-        itemID LONG NOT NULL,
-    FOREIGN KEY (itemID)
-        REFERENCES items(itemID)
-);
-CREATE TABLE IF NOT EXISTS ims.orderline (
-    orderlineID LONG PRIMARY KEY AUTO_INCREMENT,
-    orderID LONG NOT NULL,
-    itemID LONG NOT NULL,
-    customerID LONG NOT NULL,
-    quantity INT NOT NULL,
-    FOREIGN KEY (orderID)
-        REFERENCES orders (orderID),
-    FOREIGN KEY (itemID)
-        REFERENCES items (itemID)
-);
+drop database if exists ims;
+create database if not exists ims;
+create table if not exists ims.customers(id int primary key auto_increment, first_name varchar(40), last_name varchar(40));
+create table if not exists ims.items(id int primary key auto_increment, item_name varchar(40), item_value double);
+create table if not exists ims.orders(orderID int primary key auto_increment, customerID int NOT NULL, postcode varchar(40), foreign key(customerID) references customers(id));
+create table if not exists ims.orderline(orderlineID int primary key auto_increment, orderID int NOT NULL, itemID int NOT NULL, foreign key(orderID) references orders(orderID), foreign key(itemID) references items(id));

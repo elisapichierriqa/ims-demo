@@ -13,11 +13,14 @@ import org.apache.log4j.Logger;
 import com.qa.ims.controller.Action;
 import com.qa.ims.controller.CrudController;
 import com.qa.ims.controller.CustomerController;
+import com.qa.ims.controller.OrderController;
 import com.qa.ims.controller.itemController;
 import com.qa.ims.persistence.dao.CustomerDaoMysql;
 import com.qa.ims.persistence.dao.ItemDaoMysql;
+import com.qa.ims.persistence.dao.OrderDaoMysql;
 import com.qa.ims.persistence.domain.Domain;
 import com.qa.ims.services.CustomerServices;
+import com.qa.ims.services.OrderServices;
 import com.qa.ims.services.itemsServices;
 import com.qa.ims.utils.Utils;
 
@@ -33,10 +36,18 @@ public class Ims {
 
 		init(username, password);
 
+		boolean stop = false;
+		do {
+	
+				
 		LOGGER.info("Which entity would you like to use?");
 		Domain.printDomains();
 
 		Domain domain = Domain.getDomain();
+		if(domain.name().equals("STOP")) {
+			LOGGER.info("Process Ended.");
+			System.exit(0);
+		}
 		LOGGER.info("What would you like to do with " + domain.name().toLowerCase() + ":");
 
 		Action.printActions();
@@ -54,18 +65,24 @@ public class Ims {
 			doAction(ItemController, action);
 			break;
 		case ORDER:
-//			orderController OrderController = new orderController(
-//					new OrderServices(new OrderDaoMysql(username, password)));
-//			doAction(OrderController, action);
+			OrderController orderController = new OrderController(
+					new OrderServices(new OrderDaoMysql(username, password)));
+					new itemsServices(new ItemDaoMysql(username, password));
+			doAction(orderController, action);
 			break;
 		case STOP:
+			
 			break;
 		default:
 			break;
 		}
+	
 
+	} while (!stop);
+		LOGGER.info("Process ended.");
 	}
-
+	
+//could put another loop here
 	public void doAction(CrudController<?> crudController, Action action) {
 		switch (action) {
 		case CREATE:
