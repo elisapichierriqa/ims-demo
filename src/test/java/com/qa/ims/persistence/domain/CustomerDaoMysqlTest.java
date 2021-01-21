@@ -6,11 +6,11 @@ package com.qa.ims.persistence.domain;
 	import java.sql.Connection;
 	import java.sql.DriverManager;
 	import java.sql.Statement;
-import org.apache.log4j.Logger;
+	import org.apache.log4j.Logger;
 	import org.junit.Before;
 	import org.junit.BeforeClass;
 	import org.junit.Test;
-import com.qa.ims.Ims;
+	import com.qa.ims.Ims;
 	import com.qa.ims.persistence.dao.CustomerDaoMysql;
 	
 	
