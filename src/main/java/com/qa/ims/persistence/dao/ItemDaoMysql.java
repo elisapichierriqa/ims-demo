@@ -18,6 +18,7 @@ public class ItemDaoMysql implements Dao<Items> {
 	private String jdbcConnectionUrl;
 	private String username;
 	private String password;
+	
 
 	public ItemDaoMysql(String username, String password) {
 		this.jdbcConnectionUrl = "jdbc:mysql://localhost:3306/ims";
@@ -59,7 +60,7 @@ public class ItemDaoMysql implements Dao<Items> {
 	public Items readLatest() {
 		try (Connection connection = DriverManager.getConnection(jdbcConnectionUrl, username, password);
 				Statement statement = connection.createStatement();
-				ResultSet resultSet = statement.executeQuery("SELECT * FROM items ORDER BY itemID DESC LIMIT 1");) {
+				ResultSet resultSet = statement.executeQuery("SELECT * FROM items ORDER BY id DESC LIMIT 1");) {
 			resultSet.next();
 			return itemFromResultSet(resultSet);
 		} catch (Exception e) {
@@ -86,7 +87,7 @@ public class ItemDaoMysql implements Dao<Items> {
 	public Items readItems(Long id) {
 		try (Connection connection = DriverManager.getConnection(jdbcConnectionUrl, username, password);
 				Statement statement = connection.createStatement();
-				ResultSet resultSet = statement.executeQuery("SELECT * FROM items where itemID = " + id);) {
+				ResultSet resultSet = statement.executeQuery("SELECT * FROM items where id = " + id);) {
 			resultSet.next();
 			return itemFromResultSet(resultSet);
 		} catch (Exception e) {
@@ -137,15 +138,23 @@ public class ItemDaoMysql implements Dao<Items> {
 
 	@Override
 	public Orders updateOrder(Orders order) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
-	@Override
-	public Orders createOrder(Orders order) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+//	private Orders readOrders(Long orderID) {
+//		try (Connection connection = DriverManager.getConnection(jdbcConnectionUrl, username, password);
+//				Statement statement = connection.createStatement();
+//				ResultSet resultSet = statement.executeQuery("SELECT * FROM orders where orderID = " + orderID);) {
+//			resultSet.next();
+//			return orderFromResultSet(resultSet);
+//		} catch (Exception e) {
+//			LOGGER.debug(e.getStackTrace());
+//			LOGGER.error(e.getMessage());
+//		}
+//		return null;
+//
+//	}
+
 
 
 	@Override
@@ -170,6 +179,12 @@ public class ItemDaoMysql implements Dao<Items> {
 	public void deleteOrder(Long orderlineID, Long orderID) {
 		// TODO Auto-generated method stub
 		
+	}
+
+	@Override
+	public Orders createOrder(Orders order) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

@@ -16,11 +16,7 @@ public class Items {
 		this.item_name = item_name;
 		this.item_value = item_value;
 	}
-
-
-	public Items(long l, String string) {
-		// TODO Auto-generated constructor stub
-	}
+	
 	public String getItem_name() {
 		return item_name;
 	}
@@ -28,9 +24,22 @@ public class Items {
 	public void setItem_name(String item_name) {
 		this.item_name = item_name;
 	}
+	public Double getItem_value() {
+		return item_value;
+	}
+
+	public void setItem_value(Double item_value) {
+		this.item_value = item_value;
+	}
+	public Long getId() {
+		return id;
+	}
+	public void setId(Long id) {
+		this.id = id;
+	}
 	
 	public String toString() {
-		return " item ID: " + id + " item name: " + item_name + " item value: " + item_value;
+		return "id:" + id + "item_name:" + item_name + "item_value:" + item_value;
 	}
 	@Override
 	public int hashCode() {
@@ -50,36 +59,24 @@ public class Items {
 		if (getClass() != obj.getClass())
 			return false;
 		Items other = (Items) obj;
-		if (id == null) {
-			if (other.id != null)
-				return false;
-		} else if (!id.equals(other.id))
-			return false;
-		if (id == null) {
-			if (other.id != null)
-				return false;
-		} else if (id.equals(other.id))
-			return false;
 		if (item_name == null) {
 			if (other.item_name != null)
 				return false;
 		} else if (!item_name.equals(other.item_name))
 			return false;
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
+			return false;
+		if (item_value == null) {
+			if (other.item_value != null)
+				return false;
+		} else if (!item_value.equals(other.item_value))
+			return false;
 		return true;
 	}
 
-	public Double getItem_value() {
-		return item_value;
-	}
-
-	public void setItem_value(Double item_value) {
-		this.item_value = item_value;
-	}
-	public Long getId() {
-		return id;
-	}
-	public void setId(Long id) {
-		this.id = id;
-	}
+	
 
 }

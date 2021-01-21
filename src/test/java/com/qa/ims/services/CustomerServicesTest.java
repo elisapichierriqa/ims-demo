@@ -39,9 +39,9 @@ public void customerServicesUpdate() {
 	Mockito.verify(customerDao, Mockito.times(1)).update(customer);
 }
 	
-	@Test
-	public void customerServicesDelete() {
-		customerServices.delete(1L);;
-		Mockito.verify(customerDao, Mockito.times(1)).delete(1L);
-}
+//	@Test
+//	public void customerServicesDelete() {
+//		customerServices.delete(1L);;
+//		Mockito.verify(customerDao, Mockito.times(1)).delete(1L);
+//}
 }

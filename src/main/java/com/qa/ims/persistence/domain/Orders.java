@@ -40,7 +40,7 @@ public void setCustomerID(Long customerID) {
 
 
 public String toString() {
-	return "order ID:" + orderID + " customer ID:" + customerID;
+	return "order ID:" + orderID + " item ID:" + itemID + "customer ID:" + customerID + "postcode:" + postcode;
 }
 
 @Override

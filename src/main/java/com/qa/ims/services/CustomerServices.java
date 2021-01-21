@@ -32,13 +32,12 @@ public class CustomerServices implements CrudServices<Customer> {
 
 	@Override
 	public void deleteOrder(Long orderlineID, Long orderID) {
-		// TODO Auto-generated method stub
-		
-	}
+		customerDao.delete(orderlineID);
+		}
 
 	@Override
 	public Orders updateOrder(Orders order) {
-		// TODO Auto-generated method stub
+		customerDao.updateOrder(order);
 		return null;
 	}
 

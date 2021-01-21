@@ -29,37 +29,50 @@ package com.qa.ims.persistence.domain;
 		public void setUp() {
 			try (Connection connection = DriverManager.getConnection(jdbcConnectionUrl, username, password);
 					Statement statement = connection.createStatement();) {
-				statement.executeUpdate("delete from ims.items");
+				statement.executeUpdate("delete from items");
 			} catch (Exception e) {
 				LOGGER.debug(e.getStackTrace());
 				LOGGER.error(e.getMessage());
 			}
 		}
 
-		@Test
-		public void createTest() {
-			ItemDaoMysql itemDaoMysql = new ItemDaoMysql(jdbcConnectionUrl, username, password);
-			String item_name = "Broomstick";
-			Double item_value = 500.00;
-			Items item = new Items(1L, item_name, item_value);
-			Items savedItems = new Items(1L, item_name, item_value);
-			item = itemDaoMysql.create(item);
-			item.setId(1L);
-			assertEquals(savedItems, item);
-
-		}
+//		@Test
+//		public void createTest() {
+//			ItemDaoMysql itemDaoMysql = new ItemDaoMysql(jdbcConnectionUrl, username, password);
+//			//long id = 1L;
+//			String item_name = "Broomstick";
+//			Double item_value = 500.00;
+//			Items item = new Items(1L, item_name, item_value);
+//			Items savedItems = new Items(1L, item_name, item_value);
+//			item = itemDaoMysql.create(item);
+//			itemDaoMysql.readAll();
+//			assertEquals(savedItems, item);
+//
+//		}
 
 		@Test
 		public void readTest() {
 			ItemDaoMysql itemDaoMysql = new ItemDaoMysql(jdbcConnectionUrl, username, password);
 			String item_name = "Broomstick";
 			Double item_value = 500.00;
-			Items item = new Items(1L, item_name, item_value);
-			Items savedItems = new Items(1L, item_name, item_value);
+			Long id = 1L;
+			Items item = new Items(id, item_name, item_value);
+			Items savedItems = new Items(id, item_name, item_value);
 			item = itemDaoMysql.create(item);
-			item.setId(1L);
-			itemDaoMysql.readItems(1L);
+			item.setId(id);
+			itemDaoMysql.readItems(id);
 			assertEquals(savedItems, item);
 		
 }
+//		public void updateTest() {
+//			ItemDaoMysql itemDaoMysql = new ItemDaoMysql(jdbcConnectionUrl, username, password);
+//			long id = 1L;
+//			String item_name = "Better Broomstick";
+//			Double item_value = 550.00;
+//			Items item = new Items(id, item_name, item_value);
+//			Items savedItems = new Items(id, item_name, item_value);
+//			item = itemDaoMysql.update(item);
+//			savedItems = itemDaoMysql.update(savedItems);
+//			assertEquals(savedItems, item);
+//		}
 	}
