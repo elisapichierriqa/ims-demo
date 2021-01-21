@@ -1,6 +1,8 @@
 package com.qa.ims.controller;
 
 import java.util.List;
+import java.util.Scanner;
+
 import org.apache.log4j.Logger;
 
 import com.qa.ims.persistence.domain.Items;
@@ -29,8 +31,8 @@ public class itemController implements CrudController<Items>{
 	@Override
 	public List<Items> readAll() {
 		List<Items> items = itemsService.readAll();
-		for(Items items1: items) {
-			LOGGER.info(items1.toString());
+		for (@SuppressWarnings("unused") Items Items: items) {
+			LOGGER.info(items.toString());
 		}
 		return items;
 	}
@@ -41,7 +43,7 @@ public class itemController implements CrudController<Items>{
 		LOGGER.info("Please enter the name of the item you'd like to create.");
 		String item_name = getInput();
 		LOGGER.info("Please enter the value of the item you'd like to create.");
-		Double item_value = Double.valueOf(getInput());
+		Double item_value = getDoubleInput();
 		Items item = itemsService.create(new Items(item_name, item_value));
 		LOGGER.info("Item created.");
 		return item;
@@ -53,15 +55,22 @@ public class itemController implements CrudController<Items>{
 	public Items update() {
 
 		LOGGER.info("Please enter the id of the item you would like to update");
-		Long id = Long.valueOf(getInput());
-		LOGGER.info("Enter the name of the item.");
+		Long id = Long.valueOf(getLongInput());
+		LOGGER.info("Enter the new name of the item.");
 		String item_name = getInput();
 		LOGGER.info("Enter the new price of the item.");
-		Double item_value = Double.valueOf(getInput());
-		Items Items = itemsService.update(new Items(id, item_name, item_value));
+		Double item_value = getDoubleInput();
+		Items items = itemsService.update(new Items(id, item_name, item_value));
 		LOGGER.info("Item Updated.");
-		return Items;
+		return items;
 	}
+private long getLongInput() {
+	@SuppressWarnings("resource")
+	Scanner scanner = new Scanner(System.in);
+	return scanner.nextLong();
+
+}
+
 //delete an item from the system
 	@Override
 	public void delete() {

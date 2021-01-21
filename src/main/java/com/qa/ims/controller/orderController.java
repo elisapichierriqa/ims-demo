@@ -11,22 +11,10 @@ import com.qa.ims.utils.Utils;
 public class OrderController implements CrudController<Orders> {
 
 		public static final Logger LOGGER = Logger.getLogger(OrderController.class);
+		private CrudServices<Orders> OrderServices;
 		
-		private CrudServices<Orders> ordersService;
-		
-		public OrderController(CrudServices<Orders> ordersService) {
-			this.ordersService(ordersService);
-		}
-		
-
-		public OrderController(com.qa.ims.services.OrderServices orderServices) {
-			this.ordersService(ordersService);
-			}
-
-
-		private void ordersService(CrudServices<Orders> ordersService) {
-			this.ordersService(ordersService);
-			
+		public OrderController(CrudServices<Orders> OrderServices) {
+			this.OrderServices = OrderServices;
 		}
 
 
@@ -36,7 +24,7 @@ public class OrderController implements CrudController<Orders> {
 			//View all orders in the system 
 }
 		public List<Orders> readAll() {
-			List<Orders> orders = ordersService.readAll();
+			List<Orders> orders = OrderServices.readAll();
 			for(Orders order: orders) {
 				LOGGER.info(order.toString());
 			}
@@ -46,8 +34,17 @@ public class OrderController implements CrudController<Orders> {
 		/**
 		 * Creates an order in the system
 		 */
+		@Override
 		public Orders create() {
-			return null;
+			LOGGER.info("Enter customer ID.");
+			Long customerID = Long.valueOf(getInput());
+			Long itemID = Long.valueOf(getInput());
+			LOGGER.info("Enter the ID of the item you would like to add.");
+			String postcode = getInput();
+			LOGGER.info("Enter your postcode.");
+			Orders orders = OrderServices.create(new Orders(customerID, itemID, postcode));
+			LOGGER.info("Order created.");
+			return orders;
 		}
 
 		/**
@@ -56,14 +53,23 @@ public class OrderController implements CrudController<Orders> {
 		public void delete() {
 			LOGGER.info("Please enter the id of the order you would like to delete");
 			Long orderID = Long.valueOf(getInput());
-			ordersService.delete(orderID);
+			OrderServices.delete(orderID);
 		}
 
 
 		@Override
 		public Orders update() {
-			// TODO Auto-generated method stub
-			return null;
+			LOGGER.info("Please enter the ID of the order you would like to update.");
+			Long orderID = Long.valueOf(getInput());
+			LOGGER.info("Please enter your customer ID");
+			Long customerID = Long.valueOf(getInput());
+			LOGGER.info("Please enter the new item ID");
+			Long itemID = Long.valueOf(getInput());
+			LOGGER.info("Please enter the new postcode.");
+			String postcode = getInput();
+			Orders orders = OrderServices.update(new Orders(orderID, customerID, itemID, postcode));
+			LOGGER.info("Order updated.");
+			return orders;
 		}
 		
 }

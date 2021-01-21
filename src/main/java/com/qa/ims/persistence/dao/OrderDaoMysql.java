@@ -35,7 +35,7 @@ public class OrderDaoMysql implements Dao<Orders> {
 	Orders orderFromResultSet(ResultSet resultSet) throws SQLException {
 		Long orderID = resultSet.getLong("orderID");
 		Long customerID = resultSet.getLong("customerID");
-		String postcode= resultSet.getString("postcode");
+		String postcode = resultSet.getString("postcode");
 		return new Orders(orderID, customerID, postcode);
 	}
 
@@ -118,7 +118,7 @@ public class OrderDaoMysql implements Dao<Orders> {
 	@Override
 	public Orders updateOrder(Orders order) {
 		Long orderID = order.getOrderID();
-		String postcode = order.getpostcode();
+		String postcode = order.getPostcode();
 
 		try (Connection connection = DriverManager.getConnection(jdbcConnectionUrl, username, password);
 				Statement statement = connection.createStatement();) {
@@ -185,12 +185,6 @@ public class OrderDaoMysql implements Dao<Orders> {
 	}
 
 	@Override
-	public Orders create(Orders t) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
 	public Orders update(Orders t) {
 		// TODO Auto-generated method stub
 		return null;
@@ -198,8 +192,21 @@ public class OrderDaoMysql implements Dao<Orders> {
 
 	@Override
 	public void deleteOrder(Long orderlineID, Long orderID) {
-		// TODO Auto-generated method stub
+		try (Connection connection = DriverManager.getConnection(jdbcConnectionUrl, username, password);
+				Statement statement = connection.createStatement();) {
+			statement.executeUpdate("delete from orderline where orderlineID= " + orderlineID);
+			statement.executeUpdate("delete from orders where orderID = " + orderID);
+		} catch (Exception e) {
+			LOGGER.debug(e.getStackTrace());
+			LOGGER.error(e.getMessage());
+		}
 		
+	}
+
+	@Override
+	public Orders create(Orders t) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 

@@ -17,6 +17,7 @@ import com.qa.ims.persistence.domain.Items;
 
 @RunWith(MockitoJUnitRunner.class)
 
+
 	public class itemControllerTest {
 	
 	@Mock
@@ -57,6 +58,7 @@ import com.qa.ims.persistence.domain.Items;
 		String item_name = "Easel";
 		Double item_value = 20.00;
 		Mockito.doReturn(id, item_name).when(itemController).getInput();
+		Mockito.doReturn(item_value).when(itemController).getInput();
 		Items items = new Items(1L, item_name, item_value);
 		Mockito.when(itemsServices.update(items)).thenReturn(items);
 		assertEquals(items, itemController.update());

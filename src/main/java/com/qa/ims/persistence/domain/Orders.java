@@ -4,6 +4,7 @@ public class Orders {
 	private Long orderID;
 	private Long customerID;
 	private String postcode;
+	private Long itemID;
 	
 	
 public Orders(Long orderID, Long customerID, String postcode) {
@@ -12,16 +13,21 @@ public Orders(Long orderID, Long customerID, String postcode) {
 	this.postcode = postcode;
 }
 
+
+public Orders(Long orderID, Long customerID, Long itemID, String postcode) {
+	this.orderID = orderID;
+	this.customerID = customerID;
+	this.itemID = itemID;
+	this.postcode = postcode;
+}
+
+
 public Long getOrderID() {
 	return orderID;
 }
 
 public void setOrderID(Long orderID) {
 	this.orderID = orderID;
-}
-
-public String getpostcode() {
-	return postcode;
 }
 
 public Long getCustomerID() {
@@ -32,11 +38,9 @@ public void setCustomerID(Long customerID) {
 	this.customerID = customerID;
 }
 
-public void setItemID(String postcode) {
-	this.postcode = postcode;
-}
+
 public String toString() {
-	return "order ID:" + orderID + " customer ID:" + customerID + " postcode:" + postcode;
+	return "order ID:" + orderID + " customer ID:" + customerID;
 }
 
 @Override
@@ -45,7 +49,6 @@ public int hashCode() {
 	int result = 1;
 	result = prime * result + ((orderID == null) ? 0 : orderID.hashCode());
 	result = prime * result + ((customerID == null) ? 0 : customerID.hashCode());
-	result = prime * result + ((postcode == null) ? 0 : postcode.hashCode());
 	return result;
 }
 
@@ -68,12 +71,25 @@ public boolean equals(Object obj) {
 			return false;
 	} else if (!customerID.equals(other.customerID))
 		return false;
-	if (postcode == null) {
-		if (other.postcode != null)
-			return false;
-	} else if (!postcode.equals(other.postcode))
-		return false;
 	return true;
+}
+
+public String getPostcode() {
+	return postcode;
+}
+
+public void setPostcode(String postcode) {
+	this.postcode = postcode;
+}
+
+
+public Long getItemID() {
+	return itemID;
+}
+
+
+public void setItemID(Long itemID) {
+	this.itemID = itemID;
 }
 
 }

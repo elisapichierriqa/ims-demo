@@ -4,9 +4,6 @@ public class Items {
 	private Long id;
 	private String item_name;
 	private Double item_value;
-	public Object orderlineID;
-	public Object orderID;
-	public Object itemID;
 	
 	public Items(String item_name, Double item_value) {
 		super();
@@ -21,6 +18,9 @@ public class Items {
 	}
 
 
+	public Items(long l, String string) {
+		// TODO Auto-generated constructor stub
+	}
 	public String getItem_name() {
 		return item_name;
 	}
@@ -30,7 +30,7 @@ public class Items {
 	}
 	
 	public String toString() {
-		return "item ID:" + id + "item name:" + item_name;
+		return " item ID: " + id + " item name: " + item_name + " item value: " + item_value;
 	}
 	@Override
 	public int hashCode() {
@@ -77,6 +77,9 @@ public class Items {
 	}
 	public Long getId() {
 		return id;
+	}
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 }

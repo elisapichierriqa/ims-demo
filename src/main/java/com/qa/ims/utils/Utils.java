@@ -25,5 +25,10 @@ public class Utils {
 		Scanner scanner = new Scanner(System.in);
 		return scanner.nextDouble();
 	}
+	public static Long getLongInput() {
+		@SuppressWarnings("resource")
+		Scanner scanner = new Scanner(System.in);
+		return scanner.nextLong();
+	}
 
 }

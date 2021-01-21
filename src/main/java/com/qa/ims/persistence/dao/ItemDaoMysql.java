@@ -59,7 +59,7 @@ public class ItemDaoMysql implements Dao<Items> {
 	public Items readLatest() {
 		try (Connection connection = DriverManager.getConnection(jdbcConnectionUrl, username, password);
 				Statement statement = connection.createStatement();
-				ResultSet resultSet = statement.executeQuery("SELECT* FROM items ORDER BY itemID DESC LIMIT 1");) {
+				ResultSet resultSet = statement.executeQuery("SELECT * FROM items ORDER BY itemID DESC LIMIT 1");) {
 			resultSet.next();
 			return itemFromResultSet(resultSet);
 		} catch (Exception e) {
@@ -74,7 +74,7 @@ public class ItemDaoMysql implements Dao<Items> {
 	public Items create(Items item) {
 		try (Connection connection = DriverManager.getConnection(jdbcConnectionUrl, username, password);
 				Statement statement = connection.createStatement();) {
-			statement.executeUpdate("insert into items(item_name) values('" + item.getItem_name() + "')");
+			statement.executeUpdate("insert into items(item_name, item_value) values('" + item.getItem_name() + "','" + item.getItem_value() + "')");
 			return readLatest();
 		} catch (Exception e) {
 			LOGGER.debug(e.getStackTrace());
@@ -117,7 +117,7 @@ public class ItemDaoMysql implements Dao<Items> {
 	public void delete(Long id) {
 		try (Connection connection = DriverManager.getConnection(jdbcConnectionUrl, username, password);
 				Statement statement = connection.createStatement();) {
-			statement.executeUpdate("delete from items where item id = " + id);
+			statement.executeUpdate("delete from items where item id =" + id);
 		} catch (Exception e) {
 			LOGGER.debug(e.getStackTrace());
 			LOGGER.error(e.getMessage());
@@ -128,7 +128,7 @@ public class ItemDaoMysql implements Dao<Items> {
 	public void delete(String id) {
 		try (Connection connection = DriverManager.getConnection(jdbcConnectionUrl, username, password);
 				Statement statement = connection.createStatement();) {
-			statement.executeUpdate("delete from items where item id = " + id);
+			statement.executeUpdate("delete from items where item id =" + id);
 		} catch (Exception e) {
 			LOGGER.debug(e.getStackTrace());
 			LOGGER.error(e.getMessage());
@@ -147,17 +147,12 @@ public class ItemDaoMysql implements Dao<Items> {
 		return null;
 	}
 
-	@Override
-	public void deleteOrder(String orderID) {
-		// TODO Auto-generated method stub
-		
-	}
 
 	@Override
 	public void delete(long id) {
 		try (Connection connection = DriverManager.getConnection(jdbcConnectionUrl, username, password);
 				Statement statement = connection.createStatement();) {
-			statement.executeUpdate("delete from items where item id = " + id);
+			statement.executeUpdate("delete from items where item id =" + id);
 		} catch (Exception e) {
 			LOGGER.debug(e.getStackTrace());
 			LOGGER.error(e.getMessage());
@@ -166,8 +161,15 @@ public class ItemDaoMysql implements Dao<Items> {
 	}
 
 	@Override
+	public void deleteOrder(String orderID) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
 	public void deleteOrder(Long orderlineID, Long orderID) {
 		// TODO Auto-generated method stub
 		
 	}
+
 }
