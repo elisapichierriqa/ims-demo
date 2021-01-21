@@ -38,13 +38,13 @@ public class OrderController implements CrudController<Orders> {
 		public Orders create() {
 			LOGGER.info("Enter customer ID.");
 			Long customerID = Long.valueOf(getInput());
-			Long itemID = Long.valueOf(getInput());
 			LOGGER.info("Enter the ID of the item you would like to add.");
-			String postcode = getInput();
+			Long itemID = Long.valueOf(getInput());
 			LOGGER.info("Enter your postcode.");
-			Orders orders = OrderServices.create(new Orders(customerID, itemID, postcode));
+			String postcode = getInput();
+			Orders order = OrderServices.create(new Orders(customerID, itemID, postcode));
 			LOGGER.info("Order created.");
-			return orders;
+			return order;
 		}
 
 		/**
@@ -54,6 +54,7 @@ public class OrderController implements CrudController<Orders> {
 			LOGGER.info("Please enter the id of the order you would like to delete");
 			Long orderID = Long.valueOf(getInput());
 			OrderServices.delete(orderID);
+			LOGGER.info("Order deleted.");
 		}
 
 

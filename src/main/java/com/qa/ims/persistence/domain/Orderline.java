@@ -17,7 +17,7 @@ public Orderline(Long orderlineID, Long orderID, Long itemID, Long customerID) {
 
 }
 public Orderline(Long itemID, Long orderID, Double item_value) {
-	super();
+	//super();
 	this.itemID = itemID;
 	this.orderID = orderID;
 	this.item_value = item_value;

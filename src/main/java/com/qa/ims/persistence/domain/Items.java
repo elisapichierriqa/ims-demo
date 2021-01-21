@@ -6,12 +6,13 @@ public class Items {
 	private Double item_value;
 	
 	public Items(String item_name, Double item_value) {
-		super();
+//		super();
 		this.item_name = item_name;
 		this.item_value = item_value;
 	}
+	
 	public Items(Long id, String item_name, Double item_value) {
-		super();
+//		super();
 		this.id = id;
 		this.item_name = item_name;
 		this.item_value = item_value;
@@ -41,6 +42,7 @@ public class Items {
 	public String toString() {
 		return "id:" + id + "item_name:" + item_name + "item_value:" + item_value;
 	}
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;

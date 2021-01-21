@@ -50,6 +50,7 @@ public class OrderDaoMysql implements Dao<Orders> {
 				Statement statement = connection.createStatement();
 				ResultSet resultSet = statement.executeQuery("SELECT * FROM orders");) {
 			ArrayList<Orders> orders = new ArrayList<>();
+			//System.out.print("aaa");
 			while (resultSet.next()) {
 				orders.add(orderFromResultSet(resultSet));
 			}
@@ -64,7 +65,7 @@ public class OrderDaoMysql implements Dao<Orders> {
 	public Orders readLatest() {
 		try (Connection connection = DriverManager.getConnection(jdbcConnectionUrl, username, password)) {
 			Statement statement = connection.createStatement();
-			ResultSet resultSet = statement.executeQuery("SELECT * FROM orders ORDER BY orderId DESC LIMIT 1");
+			ResultSet resultSet = statement.executeQuery("SELECT * FROM orders ORDER BY orderID DESC LIMIT 1");
 			resultSet.next();
 			return orderFromResultSet(resultSet);
 		} catch (Exception e) {
@@ -84,8 +85,8 @@ public class OrderDaoMysql implements Dao<Orders> {
 	public Orders createOrder(Orders order) {
 		try (Connection connection = DriverManager.getConnection(jdbcConnectionUrl, username, password);
 				Statement statement = connection.createStatement();) {
-			statement.executeUpdate("insert into orders(customerId, orderID) values('" + order.getCustomerID() + "','"
-					+ order.getOrderID() + "')");
+			statement.executeUpdate("insert into orders(orderID, customerID, postcode) values('" + order.getOrderID() + "','"
+					+ order.getCustomerID() +  "','" + order.getPostcode() + "')");
 
 			return readLatest();
 		} catch (Exception e) {
@@ -95,10 +96,10 @@ public class OrderDaoMysql implements Dao<Orders> {
 		return null;
 	}
 
-	public Orders readOrder(Long orderID) {
+	public Orders readOrder(Long id) {
 		try (Connection connection = DriverManager.getConnection(jdbcConnectionUrl, username, password);
 				Statement statement = connection.createStatement();
-				ResultSet resultSet = statement.executeQuery("SELECT * FROM orders where orderID = " + orderID);) {
+				ResultSet resultSet = statement.executeQuery("SELECT * FROM orders where order ID = " + id);) {
 			resultSet.next();
 			return orderFromResultSet(resultSet);
 		} catch (Exception e) {

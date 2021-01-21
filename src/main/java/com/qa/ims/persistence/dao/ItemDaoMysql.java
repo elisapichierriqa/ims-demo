@@ -14,6 +14,7 @@ import com.qa.ims.persistence.domain.Items;
 import com.qa.ims.persistence.domain.Orders;
 
 public class ItemDaoMysql implements Dao<Items> {
+	
 	public static final Logger LOGGER = Logger.getLogger(ItemDaoMysql.class);
 	private String jdbcConnectionUrl;
 	private String username;
@@ -102,8 +103,7 @@ public class ItemDaoMysql implements Dao<Items> {
 	public Items update(Items item) {
 		try (Connection connection = DriverManager.getConnection(jdbcConnectionUrl, username, password);
 				Statement statement = connection.createStatement();) {
-			statement.executeUpdate(
-					"update items set item_name ='" + item.getItem_name() + "' where id =" + item.getId());
+			statement.executeUpdate("update items set item_name ='" + item.getItem_name() +"', item_value ='" + item.getItem_value() + "' WHERE id =" + item.getId());
 			return readItems(item.getId());
 		} catch (Exception e) {
 			LOGGER.debug(e.getStackTrace());
@@ -118,7 +118,7 @@ public class ItemDaoMysql implements Dao<Items> {
 	public void delete(Long id) {
 		try (Connection connection = DriverManager.getConnection(jdbcConnectionUrl, username, password);
 				Statement statement = connection.createStatement();) {
-			statement.executeUpdate("delete from items where item id =" + id);
+			statement.executeUpdate("delete from items where id =" + id);
 		} catch (Exception e) {
 			LOGGER.debug(e.getStackTrace());
 			LOGGER.error(e.getMessage());
@@ -129,7 +129,7 @@ public class ItemDaoMysql implements Dao<Items> {
 	public void delete(String id) {
 		try (Connection connection = DriverManager.getConnection(jdbcConnectionUrl, username, password);
 				Statement statement = connection.createStatement();) {
-			statement.executeUpdate("delete from items where item id =" + id);
+			statement.executeUpdate("delete from items where id =" + id);
 		} catch (Exception e) {
 			LOGGER.debug(e.getStackTrace());
 			LOGGER.error(e.getMessage());
