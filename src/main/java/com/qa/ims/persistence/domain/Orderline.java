@@ -3,14 +3,16 @@ package com.qa.ims.persistence.domain;
 public class Orderline {
 	
 	private Long orderlineID;
+	private Long orderID;
 	private int quantity;
 	private Long itemID;
 	private Double item_value;
 	
 	
-public Orderline(Long orderlineID, int quantity, Long itemID, Double item_value) {
+public Orderline(Long orderlineID, Long orderID, int quantity, Long itemID, Double item_value) {
 	super();
 	this.orderlineID = orderlineID;
+	this.orderID = orderID;
 	this.quantity = quantity;
 	this.itemID = itemID;
 	this.item_value = item_value;
@@ -37,6 +39,13 @@ public Long getOrderlineID() {
 
 public void setOrderlineID(Long orderlineID) {
 	this.orderlineID = orderlineID;
+}
+public Long getOrderID() {
+	return orderlineID;
+}
+
+public void setOrderID(Long orderID) {
+	this.orderID = orderID;
 }
 
 public Long getItemID() {
@@ -72,7 +81,7 @@ public boolean equals(Object obj) {
 	if (itemID == null) {
 		if (other.itemID != null)
 			return false;
-	} else if (orderlineID.equals(other.orderlineID))
+	} else if (orderID.equals(other.orderID))
 		return false;
 	if (item_value == null) {
 		if (other.item_value != null)
