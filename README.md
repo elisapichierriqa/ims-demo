@@ -1,37 +1,44 @@
-Coverage: 34%
+Coverage: 61.5%
+src/main/java 42.0%
+src/test/java 97.8%
 # Inventory Management System
 
-One Paragraph of project description goes here
+This application is intended to be interactable by an end user via a Command Line Interface (CLI) with the intention of managing an inventory.
 
 ## Getting Started
 
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
-
+This project uses Java via Eclipse and Mysql via Workbench and Google Cloud Platform, with the codebase hosted on Github. 
 ### Prerequisites
 
 What things you need to install the software and how to install them
 
 ```
-Give examples
+Installing Java: https://www.java.com/en/download/
+Installing Eclipse: https://www.eclipse.org/downloads/
+Installing Mysql: https://dev.mysql.com/downloads/installer/
+Installing Workbench:https://dev.mysql.com/downloads/workbench/
+Github host: https://github.com/
+Google Cloud Platform: https://cloud.google.com/
 ```
 
 ### Installing
 
-A step by step series of examples that tell you how to get a development env running
-
-Say what the step will be
-
+Install the above softwares, navigate to https://github.com/elisapichierriqa/ims-demo and fork the project. 
+Navigate to the Target folder in ims-demo-master folder. 
+Open command line here.
+In command line, type java -jar chris-ims-0.01-jar-with-dependencies
+Basic functionality of the codebase should now be accessible. 
 ```
-Give the example
+Try out functions such as "customer", "item" etc.
+This should return the following options:
+CREATE
+READ
+UPDATE
+DELETE
+RETURN
+STOP
 ```
 
-And repeat
-
-```
-until finished
-```
-
-End with an example of getting some data out of the system or using it for a little demo
 
 ## Running the tests
 
@@ -75,6 +82,7 @@ We use [SemVer](http://semver.org/) for versioning.
 ## Authors
 
 * **Chris Perrins** - *Initial work* - [christophperrins](https://github.com/christophperrins)
+* **Elisa Pichierri**- *Project Additions* [elisapichierriqa](https://github.com/elisapichierriqa)
 
 ## License
 
@@ -84,6 +92,7 @@ This project is licensed under the MIT license - see the [LICENSE.md](LICENSE.md
 
 ## Acknowledgments
 
+Thank you to Aswene for dealing with my panicked questions when something broke, and to my friend @Salterius for calmly listening to me despair about broken code.
 * Hat tip to anyone whose code was used
 * Inspiration
 * etc

@@ -3,31 +3,25 @@ package com.qa.ims.persistence.domain;
 public class Orderline {
 	
 	private Long orderlineID;
-	private Long orderID;
+	private int quantity;
 	private Long itemID;
-	private Long customerID;
 	private Double item_value;
 	
 	
-public Orderline(Long orderlineID, Long orderID, Long itemID, Long customerID) {
+public Orderline(Long orderlineID, int quantity, Long itemID, Double item_value) {
+	super();
 	this.orderlineID = orderlineID;
-	this.orderID = orderID;
+	this.quantity = quantity;
 	this.itemID = itemID;
-	this.customerID = customerID;
-
-}
-public Orderline(Long itemID, Long orderID, Double item_value) {
-	//super();
-	this.itemID = itemID;
-	this.orderID = orderID;
 	this.item_value = item_value;
+
 }
 
-public Long getCustomerID() {
-	return customerID;
+public int getQuantity() {
+	return quantity;
 }
-public void setCustomerID(Long customerID) {
-	this.customerID = customerID;
+public void setQuantity(int quantity) {
+	this.quantity = quantity;
 }
 public Double getItem_value() {
 	return item_value;
@@ -45,14 +39,6 @@ public void setOrderlineID(Long orderlineID) {
 	this.orderlineID = orderlineID;
 }
 
-public Long getOrderID() {
-	return orderID;
-}
-
-public void setOrderID(Long orderID) {
-	this.orderID = orderID;
-}
-
 public Long getItemID() {
 	return itemID;
 }
@@ -65,7 +51,7 @@ public int hashCode() {
 	final int prime = 31;
 	int result = 1;
 	result = prime * result + ((orderlineID == null) ? 0 : orderlineID.hashCode());
-	result = prime * result + ((orderID == null) ? 0 : orderID.hashCode());
+//	result = prime * result + ((orderID == null) ? 0 : orderID.hashCode());
 	return result;
 }
 
@@ -83,8 +69,8 @@ public boolean equals(Object obj) {
 			return false;
 	} else if (!itemID.equals(other.itemID))
 		return false;
-	if (orderID == null) {
-		if (other.orderID != null)
+	if (itemID == null) {
+		if (other.itemID != null)
 			return false;
 	} else if (orderlineID.equals(other.orderlineID))
 		return false;
