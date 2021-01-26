@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>OrderServices.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">chris-ims</a> &gt; <a href="index.source.html" class="el_package">com.qa.ims.services</a> &gt; <span class="el_source">OrderServices.java</span></div><h1>OrderServices.java</h1><pre class="source lang-java linenums">package com.qa.ims.services;
+
+import java.util.List;
+
+import com.qa.ims.persistence.dao.Dao;
+import com.qa.ims.persistence.domain.Orders;
+
+public class OrderServices implements CrudServices&lt;Orders&gt; {
+	
+	private Dao&lt;Orders&gt; orderDao;
+	
+<span class="nc" id="L12">	public OrderServices(Dao&lt;Orders&gt; orderDaoMysql) {</span>
+<span class="nc" id="L13">		this.orderDao = orderDaoMysql;</span>
+<span class="nc" id="L14">	}</span>
+
+//	public void orderServices(Dao&lt;Orders&gt; orderDao) {
+//		this.orderDao = orderDao;
+//	}
+	
+	public List&lt;Orders&gt; readAll() {
+<span class="nc" id="L21">		return orderDao.readAll();</span>
+	}
+
+	public Orders create(Orders orders) {
+<span class="nc" id="L25">		return orderDao.create(orders);</span>
+	}
+
+	public Orders update(Orders order) {
+<span class="nc" id="L29">		return orderDao.update(order);</span>
+	}
+
+	public void delete(Long orderID) {
+<span class="nc" id="L33">		orderDao.delete(orderID);</span>
+<span class="nc" id="L34">	}</span>
+	
+	@Override
+	public void deleteOrder(Long orderlineID, Long orderID) {
+<span class="nc" id="L38">		orderDao.deleteOrder(orderlineID, orderID);</span>
+<span class="nc" id="L39">	}</span>
+
+	@Override
+	public Orders updateOrder(Orders order) {
+<span class="nc" id="L43">		return orderDao.updateOrder(order);</span>
+	}
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span></div></body></html>

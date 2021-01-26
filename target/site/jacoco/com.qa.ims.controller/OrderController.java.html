@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>OrderController.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">chris-ims</a> &gt; <a href="index.source.html" class="el_package">com.qa.ims.controller</a> &gt; <span class="el_source">OrderController.java</span></div><h1>OrderController.java</h1><pre class="source lang-java linenums">package com.qa.ims.controller;
+
+import java.util.List;
+
+import org.apache.log4j.Logger;
+
+import com.qa.ims.persistence.domain.Orders;
+import com.qa.ims.services.CrudServices;
+import com.qa.ims.utils.Utils;
+
+public class OrderController implements CrudController&lt;Orders&gt; {
+
+<span class="nc" id="L13">		public static final Logger LOGGER = Logger.getLogger(OrderController.class);</span>
+		private CrudServices&lt;Orders&gt; OrderServices;
+		
+<span class="nc" id="L16">		public OrderController(CrudServices&lt;Orders&gt; OrderServices) {</span>
+<span class="nc" id="L17">			this.OrderServices = OrderServices;</span>
+<span class="nc" id="L18">		}</span>
+
+
+		String getInput() {
+<span class="nc" id="L22">			return Utils.getInput();</span>
+	
+			//View all orders in the system 
+}
+		public List&lt;Orders&gt; readAll() {
+<span class="nc" id="L27">			List&lt;Orders&gt; orders = OrderServices.readAll();</span>
+<span class="nc bnc" id="L28" title="All 2 branches missed.">			for(Orders order: orders) {</span>
+<span class="nc" id="L29">				LOGGER.info(order.toString());</span>
+<span class="nc" id="L30">			}</span>
+<span class="nc" id="L31">			return orders;</span>
+		}
+
+		/**
+		 * Creates an order in the system
+		 */
+		@Override
+		public Orders create() {
+<span class="nc" id="L39">			LOGGER.info(&quot;Enter customer ID.&quot;);</span>
+<span class="nc" id="L40">			Long customerID = Long.valueOf(getInput());</span>
+<span class="nc" id="L41">			LOGGER.info(&quot;Enter the ID of the item you would like to add.&quot;);</span>
+<span class="nc" id="L42">			Long itemID = Long.valueOf(getInput());</span>
+<span class="nc" id="L43">			LOGGER.info(&quot;Enter your postcode.&quot;);</span>
+<span class="nc" id="L44">			String postcode = getInput();</span>
+<span class="nc" id="L45">			Orders order = OrderServices.create(new Orders(customerID, itemID, postcode));</span>
+<span class="nc" id="L46">			LOGGER.info(&quot;Order created.&quot;);</span>
+<span class="nc" id="L47">			return order;</span>
+		}
+
+		/**
+		 * Deletes an existing order by the id of the order
+		 */
+		public void delete() {
+<span class="nc" id="L54">			LOGGER.info(&quot;Please enter the id of the order you would like to delete&quot;);</span>
+<span class="nc" id="L55">			Long orderID = Long.valueOf(getInput());</span>
+<span class="nc" id="L56">			OrderServices.delete(orderID);</span>
+<span class="nc" id="L57">			LOGGER.info(&quot;Order deleted.&quot;);</span>
+<span class="nc" id="L58">		}</span>
+
+
+		@Override
+		public Orders update() {
+<span class="nc" id="L63">			LOGGER.info(&quot;Please enter the ID of the order you would like to update.&quot;);</span>
+<span class="nc" id="L64">			Long orderID = Long.valueOf(getInput());</span>
+<span class="nc" id="L65">			LOGGER.info(&quot;Please enter your customer ID&quot;);</span>
+<span class="nc" id="L66">			Long customerID = Long.valueOf(getInput());</span>
+<span class="nc" id="L67">			LOGGER.info(&quot;Please enter the new item ID&quot;);</span>
+<span class="nc" id="L68">			Long itemID = Long.valueOf(getInput());</span>
+<span class="nc" id="L69">			LOGGER.info(&quot;Please enter the new postcode.&quot;);</span>
+<span class="nc" id="L70">			String postcode = getInput();</span>
+<span class="nc" id="L71">			Orders orders = OrderServices.update(new Orders(orderID, customerID, itemID, postcode));</span>
+<span class="nc" id="L72">			LOGGER.info(&quot;Order updated.&quot;);</span>
+<span class="nc" id="L73">			return orders;</span>
+		}
+		
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span></div></body></html>
